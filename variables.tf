@@ -1,32 +1,51 @@
-variable "GOOGLE_REGION" {
-  type        = string
-  default     = "us-central1-c"
-  description = "GCP region name"
-}
-
 variable "GOOGLE_PROJECT" {
   type        = string
   description = "GCP project name"
 }
-
-variable "GITHUB_OWNER" {
+           
+variable "GOOGLE_REGION" {
   type        = string
-  description = "GitHUb owner repository to use"
+  default     = "us-central1-c"
+  description = "GCP region to use"
 }
 
-variable "GITHUB_TOKEN" {
+variable "GKE_NUM_NODES" {
+  type        = number
+  description = "Number of nodes in GKE"
+  default     = 2
+}
+
+variable "GKE_MACHINE_TYPE" {
   type        = string
-  description = "GitHUb personal access token"
+  default     = "g1-small"
+  description = "Machine type"
+}
+
+variable "algorithm" {
+  type        = string
+  default     = "ECDSA"
+  description = "The cryptographic algorithm (e.g. RSA, ECDSA)"
+}
+
+variable "ecdsa_curve" {
+  type        = string
+  default     = "P256"
+  description = "The elliptic curve (e.g. P256, P384, P521)"
+}
+
+variable "GITHUB_OWNER" {
+  type = string
+  default = "pontarr"
+  description = "Github username"
 }
 
 variable "FLUX_GITHUB_REPO" {
-  type        = string
+  type = string
   default = "flux-gitops"
-  description = "Flux GitOps repository"
+  description = "GitHub repository to store Flux manifests"
 }
 
-variable "FLUX_GITHUB_TARGET_PATH" {
-  type        = string
-  default = "clusters"
-  description = "Flux manifest subdirectory"
+variable "GITHUB_TOKEN" {
+  type = string
+  description = "The token used to authenticate with the Git repository"
 }
