@@ -29,7 +29,7 @@ module "flux_bootstrap" {
 }
 
 
-module "kubernetes-engine_workload-identity" {
+module "gke_workload-identity" {
     source = "terraform-google-modules/kubernetes-engine/google//modules/workload-identity"
     use_existing_k8s_sa = true
     name = "kustomize-controller"
@@ -42,7 +42,7 @@ module "kubernetes-engine_workload-identity" {
     
 }
 
-module "kms" {
+/*module "kms" {
     source = "github.com/den-vasyliev/terraform-google-kms"
     project_id = var.GOOGLE_PROJECT
     keyring = "sops-flux-3"
@@ -50,7 +50,19 @@ module "kms" {
     keys = ["sops-key-flux-3"]
     prevent_destroy = false
     
+}*/
+
+module "kms" {
+  source  = "terraform-google-modules/kms/google"
+  version = "~> 2.2"
+
+  project_id         = var.GOOGLE_PROJECT
+  location           = "global"
+  keyring            = "sops-flux-31"
+  keys               = ["sops-key-flux-31"]
+  
 }
+
 
 terraform {
   backend "gcs" {
